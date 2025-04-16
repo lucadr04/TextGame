@@ -1,0 +1,59 @@
+{
+    "step1" : {
+        "text": "You are in the game!",
+        "options": [
+            {
+                "text": "Go back to sleep",
+                "attributes": [{}],
+                "items": [{}],
+                "effects": [{}],
+                "flags": [{}],
+                "action": "default",
+                "target": "step2"
+            },
+            {
+                "text": "Go make breakfast",
+                "attributes": [{}],
+                "items": [{}],
+                "effects": [{}],
+                "flags": [{}],
+                "action": "default",
+                "target": "step3"
+            }
+        ],
+        "image": "Immagine qui",
+        "ost": "OST qui"
+    },
+    "step2" : {
+        "text": "ZzZzZzZ!",
+        "image": "Immagine qui",
+        "ost": "OST qui"
+    },
+    "step3" : {
+        "text": "What are you gonna make?",
+        "options": [
+            {
+                "text": "Pane e nuetlla ofc!",
+                "attributes": [{}],
+                "items": [{}],
+                "effects": [{}],
+                "flags": [{}],
+                "action": "jump",
+                "target": "step3",
+                "nextlocation":  "",
+                "nextday": ""
+            },
+            {
+                "text": "Tea and biscuits",
+                "attributes": [{}],
+                "items": [{}],
+                "effects": [{}],
+                "flags": [{}],
+                "action": "default",
+                "target": "step3"
+            }
+        ],
+        "image": "Immagine qui",
+        "ost": "OST qui"
+    }
+}

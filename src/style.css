@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+  font-family: 'VT323', monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2vw;
+  line-height: 1.8vw;
+  overflow: hidden;
+  background-color: black;
+}
+
+* {
+  user-select: none;
+}
+
+/* Chromium le scrollbar fan schifo */
+::-webkit-scrollbar {width: 0.5vw;}
+::-webkit-scrollbar-track {background: black;}
+::-webkit-scrollbar-thumb {background: silver;border-radius: 4px;}
+::-webkit-scrollbar-thumb:hover {background: #555;}
+
+/* cursori */
+@media (max-width: 719px) { * { cursor: url('/cur/sc.cur'), pointer; } } 
+@media (min-width: 720px) { * { cursor: url('/cur/mc.cur'), pointer; } } 
+@media (min-width: 2048px) { * { cursor: url('/cur/lc.cur'), pointer; } } 
+
+a {
+  color: silver;
+  text-decoration: none;
+}
+
+main {
+  padding: 5vh 16vw;
+  padding-top: 2vh;
+}
+
+.screenbox {
+  margin: 0;
+  display: grid;
+  color: silver;
+  grid-template-rows: 10vh 75vh;
+}
+
+.navbox {
+  font-size: 2vw;
+  display: flex;
+  align-items: flex-end;  
+  justify-content: flex-start;
+  padding-bottom: 2vh;
+}
+
+.playbox {
+  display: grid;
+  grid-template-rows: 30vh 40vh;
+  grid-template-columns: auto;
+}
+
+.textbox {
+  border: 0.3vh solid silver;
+  padding: 3vh 2vw;
+  overflow-y: scroll;
+}
+
+.bottombox {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  text-align: left;
+  padding-top: 1vh;
+}
+
+.choicebox {
+  border: 0.3vh solid silver;
+  padding: 3vh 2vw;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.choicerow {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  gap: 1vw;
+  padding: 1vh 0;
+  max-width: 100%;  /* Ensure the container's width stays responsive */
+  width: 100%;  /* Make sure the container takes up the full available width */
+}
+
+.choicetext {
+  border: 0.3vh solid silver;
+  padding: 1vh;
+  overflow: hidden;
+}
+
+.choicetext:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.choicemeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1vh;
+  overflow: hidden;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.choicemetaleft,
+.choicemetaright {
+  padding: 0.5vh 0.5vw;
+  font-size: 2rem;
+}
+
+.choicemetaleft:hover,
+.choicemetaright:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.imagebox {
+  overflow: hidden;
+  padding: 3vw;
+}
+
+.titlebox {
+  color: silver;
+  margin: 0;
+  display: grid;
+  grid-template-rows: 60vh 10vh; 
+  padding-top: 10vh;
+}
