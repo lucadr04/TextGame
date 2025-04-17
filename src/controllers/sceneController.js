@@ -1,5 +1,5 @@
 /* 
-  Here is the controller that manages the flow inside game/main
+  This is the controller that manages the flow inside game/main
 */
 
 import { useGameStore } from '../stores/gameStore.js'
@@ -13,14 +13,13 @@ import { useLayoutStore } from '../stores/layoutStore.js'
 export async function printScene() {
   const game = useGameStore()
   const layout = useLayoutStore()
-  const { checkScene, reloadSceneData, getSceneData } = game
 
   // Scene initialization
-  if (!checkScene()) {
-    await reloadSceneData();
+  if (!game.checkScene()) {
+    await game.reloadSceneData();
   }
   
-  const currentStepData = getSceneData();
+  const currentStepData = game.getSceneData();
 
   layout.updateTextbox(currentStepData.text)
   /*layout.updateImagebox()*/
@@ -28,20 +27,35 @@ export async function printScene() {
 
   // The choicebox is a complex one to handle, here is all the logic behind it
   // (maybe do a function just for that <3)
-  const formattedOptions = formatOptions(currentStepData.options)
+  const formattedOptions = game.formatOptions(currentStepData.options)
   
-  layout.updateChoice(formattedOptions)
+  layout.updateChoicebox(formattedOptions)
 }
 
 // Function that handles when a choicetext is selected
-export function handleChoicePress(action, target) {
-  const { setCurrentDay } = game
-  if(action === "jump") {
+export async function handleChoicePress(action, target) {
+  const game = useGameStore()
+  const { reloadSceneData, setCurrentDay, setCurrentLocation, setCurrentStep, logCurrent } = game
 
+  // Jump for when the day and/or location changes
+  if(action === "jump") {
+    setCurrentDay(target[2])
+    setCurrentLocation(target[1])
+    setCurrentStep(target[0])
+    await reloadSceneData()
+    // apply music here
+    await new Promise(resolve => setTimeout(resolve, 700))
   }
-  /*updateGameStore()*/
-  /*reloadSceneData()*/
-  /*printScene()*/
+  // Jump for when only the step changes
+  if(action === "default") {
+    setCurrentStep(target[0])
+    await reloadSceneData()
+    // apply music here
+    await new Promise(resolve => setTimeout(resolve, 300))
+  }
+  
+  // Reload scene
+  await printScene()
 }
 
 // Function that manages options

@@ -1,3 +1,10 @@
+/*
+  This is the game store
+  It controls the position inside the game and gives a way to manipulate them
+  It also saves the content of the current step
+  Here save states will be implemented
+*/
+
 import { defineStore } from 'pinia'
 import { ref, reactive } from 'vue'
 
@@ -53,6 +60,11 @@ export const useGameStore = defineStore('game', () => {
     return !!flags[name]
   }
 
+  // debug
+  function logCurrent() {
+    console.log(`day: ${currentDay.value}, location: ${currentLocation.value}, step ${currentStep.value}`)
+  }
+
   return {
     reloadSceneData,
     getSceneData,
@@ -62,5 +74,6 @@ export const useGameStore = defineStore('game', () => {
     setCurrentDay,
     setCurrentLocation,
     setCurrentStep,
+    logCurrent
   }
 })

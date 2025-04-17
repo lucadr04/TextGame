@@ -1,5 +1,6 @@
+<!-- This is the navbar displayed at the top of the main screen -->
+
 <template>
-  <!-- Here is the navbar displayed at the top of the main screen -->
   <nav class="navbar">
     <div>
       <router-link to="/game/main" class="navdiv">Game</router-link>

@@ -8,8 +8,8 @@
                 "items": [{}],
                 "effects": [{}],
                 "flags": [{}],
-                "action": "default",
-                "target": "step2"
+                "action": "jump",
+                "target": ["step1","base","day2"]
             },
             {
                 "text": "Go make breakfast",
@@ -18,7 +18,7 @@
                 "effects": [{}],
                 "flags": [{}],
                 "action": "default",
-                "target": "step3"
+                "target": ["step3"]
             }
         ],
         "image": "Immagine qui",
@@ -38,10 +38,8 @@
                 "items": [{}],
                 "effects": [{}],
                 "flags": [{}],
-                "action": "jump",
-                "target": "step3",
-                "nextlocation":  "",
-                "nextday": ""
+                "action": "default",
+                "target": ["step3"]                
             },
             {
                 "text": "Tea and biscuits",
@@ -50,7 +48,7 @@
                 "effects": [{}],
                 "flags": [{}],
                 "action": "default",
-                "target": "step3"
+                "target": ["step3"]
             }
         ],
         "image": "Immagine qui",

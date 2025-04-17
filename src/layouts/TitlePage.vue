@@ -1,3 +1,10 @@
+<!--
+  This is the title page.
+  This page contains the game logo, the start button, that sends yout to /game/main
+  To be implemented is a OST that plays behind it
+  To be implemented is the button that, if you don't have a save file, creates one
+-->
+
 <template>
   <div class="titlebox">
     <!-- Logo -->

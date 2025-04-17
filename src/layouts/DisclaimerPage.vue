@@ -1,3 +1,9 @@
+<!--
+  This is the disclaimer page.
+  The first page that shows.
+  It is simply a text with a bti of transition
+-->
+
 <template>
   <div class="disclaimerbox">
     <transition name="fade">

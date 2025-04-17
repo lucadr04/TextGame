@@ -1,15 +1,18 @@
+/*
+  This is a simple router
+*/
+
 import { createRouter, createWebHistory } from 'vue-router'
 
 import MainLayout from '../layouts/MainLayout.vue'
+import DisclaimerPage from '../layouts/DisclaimerPage.vue'
+import TitlePage from '../layouts/TitlePage.vue'
 
 import AttributesPage from '../views/AttributesPage.vue'
 import MainPage from '../views/MainPage.vue'
 import InventoryPage from '../views/InventoryPage.vue'
 import HistoryPage from '../views/HistoryPage.vue'
 import SettingsPage from '../views/SettingsPage.vue'
-
-import DisclaimerPage from '../views/DisclaimerPage.vue'
-import TitlePage from '../views/TitlePage.vue'
 
 const routes = [
   {

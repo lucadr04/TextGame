@@ -1,3 +1,8 @@
+/*
+  This is the attributes store
+  It keeps track of the player's attributes and gives a way of manipulating them
+*/
+
 import { defineStore } from 'pinia'
 import { ref, reactive } from 'vue'
 

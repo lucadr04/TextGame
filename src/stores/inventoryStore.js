@@ -1,3 +1,8 @@
+/*
+  This is the inventory store
+  It keeps track of the player's items and gives a way of manipulating them
+*/
+
 import { defineStore } from 'pinia'
 import { ref, reactive } from 'vue'
 

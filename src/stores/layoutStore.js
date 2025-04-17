@@ -1,3 +1,8 @@
+/*
+  This is the layout store
+  It keeps track of what is displayed in the main layout and gives a way of manipulating it
+*/
+
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -14,12 +19,18 @@ export const useLayoutStore = defineStore('layout', () => {
     textbox.value = newText
   }
 
-  function updateChoice(newChoices) {
+  function updateChoicebox(newChoices) {
     choices.value = newChoices
   }
 
-  function updateImage(newImage) {
+  function updateImagebox(newImage) {
     image.value = newImage
+  }
+
+  function emptyScene() {
+    textbox.value = ""
+    choices.value = ""
+    image.value = ""
   }
 
   return {
@@ -27,7 +38,8 @@ export const useLayoutStore = defineStore('layout', () => {
     choices,
     image,
     updateTextbox,
-    updateChoice,
-    updateImage
+    updateChoicebox,
+    updateImagebox,
+    emptyScene
   }
 })
