@@ -2,7 +2,7 @@
 
 <script setup>
   import { onMounted } from 'vue'
-  import { printScene } from '../controllers/sceneController.js'
+  import { printScene } from '../controllers/gameController.js'
   
   onMounted(async () => {
     await printScene()

@@ -28,9 +28,9 @@ export const useLayoutStore = defineStore('layout', () => {
   }
 
   function emptyScene() {
-    textbox.value = ""
-    choices.value = ""
-    image.value = ""
+    textbox.value = ''
+    choices.value = ''
+    image.value = ''
   }
 
   return {

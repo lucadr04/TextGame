@@ -8,14 +8,17 @@ import { ref, reactive } from 'vue'
 
 export const useAttributesStore = defineStore('attributes', () => {
     const attributes = reactive({
+      sanity: 2,
       toughness: 2,
       resolve: 2,
       charisma: 2,
       hope: 2,
       luck: 2
     })
+    const descriptions = ref({})
+    const currDescription = ref('')
   
-    function updateAttribute(attr, amount) {
+    function increaseAttribute(attr, amount) {
       if (attributes[attr] !== undefined) {
         attributes[attr] += amount
       }
@@ -24,11 +27,41 @@ export const useAttributesStore = defineStore('attributes', () => {
     function checkAttribute(attr) {
       return attributes[attr]
     }
+
+    function getFormattedAttributes() {
+      return Object.entries(attributes).map(([text, meta]) => ({ text, meta, action:'default', target:text }))
+    }
+
+    function checkDesc() { 
+      return !!descriptions.value && Object.keys(descriptions.value).length > 0;
+    }
+
+    async function loadDesc() {
+      try {
+        const module = await import(`../assets/attributes.json`)
+        console.log('Loaded Attributes Data')
+        descriptions.value = module.default
+      } catch (error) {
+        console.error('Failed to load scene data:', error)
+      }
+    }
+
+    function getCurrDesc() {
+      return currDescription.value
+    }
+
+    function loadCurrDesc(item) {
+      currDescription.value = descriptions.value[item]
+    }
   
     return {
-      attributes,
-      updateAttribute,
-      checkAttribute
+      increaseAttribute,
+      checkAttribute,
+      getFormattedAttributes,
+      getCurrDesc,
+      loadCurrDesc,
+      checkDesc,
+      loadDesc
     }
   })
   

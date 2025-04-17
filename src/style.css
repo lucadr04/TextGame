@@ -98,7 +98,7 @@ main {
 .choicemeta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   padding: 1vh;
   overflow: hidden;
@@ -106,10 +106,15 @@ main {
   overflow-wrap: break-word;
 }
 
+.choicemetatext {
+  padding: 0 0.5vw;
+  font-size: 2.5vw;
+  font-weight: bold;
+}
+
 .choicemetaleft,
 .choicemetaright {
-  padding: 0.5vh 0.5vw;
-  font-size: 2rem;
+  padding: 1vh;
 }
 
 .choicemetaleft:hover,

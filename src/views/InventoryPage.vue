@@ -1,14 +1,10 @@
 <template></template>
 
-<script>
-  export default {
-    mounted() {
-      document.querySelector('.choicebox').textContent = 
-       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet sapien quis nulla tempus congue. Aliquam dictum orci vel mauris aliquet cursus. Maecenas at porttitor mi. Quisque venenatis quam ut ultricies mattis. Nullam id lorem neque. Aenean convallis quis purus in mollis. Nam varius eleifend imperdiet. Duis blandit dolor a augue tincidunt, vitae placerat lorem semper. Nunc tempor metus sed elit consectetur vulputate vitae non sem. Cras nec sem ullamcorper, efficitur est non, pharetra nunc. Nulla sed hendrerit risus, et accumsan turpis. Nam non convallis quam, ut placerat enim. Vestibulum in ligula vel lacus imperdiet consectetur. Pellentesque dignissim dignissim justo vel suscipit. Ut laoreet eget mi sed ultricies."
-      +"Quisque hendrerit justo ac varius malesuada. Aliquam tincidunt eros eu eros ullamcorper fringilla. Maecenas a efficitur ligula. Ut eget risus at augue accumsan pretium. Proin sit amet libero at nulla ultricies dictum quis non erat. Duis a purus sed metus luctus rhoncus. Nulla facilisi. Donec dignissim nisi turpis, vel tempor lorem auctor vitae. Aliquam id ante sed lorem rhoncus fermentum. Ut gravida vel elit at auctor. Nunc consectetur purus est, quis porttitor ex accumsan id. Nullam eleifend lacus sit amet odio rhoncus bibendum. Sed non iaculis justo. Morbi nisi nisl, fermentum id interdum at, gravida facilisis orci. Sed non fermentum tellus. Mauris tempor metus sed vehicula porta."
-      +"Maecenas et est sodales, egestas arcu in, facilisis nulla. Pellentesque laoreet dapibus dignissim. Pellentesque ex dolor, faucibus ut neque sit amet, viverra sodales velit. Suspendisse maximus nisl convallis, efficitur erat ut, ultrices dui. Praesent feugiat magna tortor, eu molestie lorem maximus at. Etiam diam nibh, dignissim sit amet tellus sit amet, dignissim maximus lectus. Phasellus in congue arcu."
-      +"Donec tempor tortor eu libero pharetra vehicula. Etiam aliquet auctor enim, sit amet blandit sapien facilisis eget. Sed ac venenatis risus, vitae finibus urna. Proin bibendum odio vel massa elementum aliquam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam pharetra faucibus porttitor. Aenean suscipit sem nisl, sed ornare velit rutrum nec."
-      +"Duis vel enim ut ex ultrices faucibus nec sit amet turpis. Donec semper elit libero, ac fringilla ligula dapibus et. Integer aliquet sapien at tincidunt faucibus. Cras commodo tellus in nisi accumsan fringilla. Nam eu nibh metus. Aenean urna lacus, consectetur id erat eget, tincidunt commodo quam. Vivamus pharetra tempus posuere. Nunc suscipit congue leo, non pharetra metus aliquam a. Etiam in consequat ligula, ac cursus tortor.";
-    }
-  }
+<script setup>
+  import { onMounted } from 'vue'
+  import { printScene } from '../controllers/inventoryController.js'
+  
+  onMounted(async () => {
+    await printScene()
+  })
 </script>

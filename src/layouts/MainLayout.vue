@@ -23,12 +23,12 @@
                 <div class="choicerow" v-for="(choice, i) in layout.choices" :key="i">
                   <div class="choicetext" @click="handleAction(choice.action, choice.target)">{{ choice.text }}</div>
                   <div class="choicemeta">
-                    {{ choice.meta }}
                     <div class="choicemetaleft" @click="leftAction(choice.laction, choice.ltarget)">
                       {{ choice.lb }}
                     </div>
+                    <div class="choicemetatext">{{ choice.meta }}</div>
                     <div class="choicemetaright" @click="rightAction(choice.raction, choice.rtarget)">
-                      {{ choice.rb }}
+                      {{ choice.rb }}Use
                     </div>
                   </div>
                 </div>
@@ -54,7 +54,7 @@ import Navbar from '../components/Navbar.vue'
 import { useLayoutStore } from '../stores/layoutStore'
 const layout = useLayoutStore()
 
-import { handleChoicePress } from '../controllers/sceneController.js'
+import { handleChoicePress } from '../controllers/gameController.js'
 import { handleItemPress } from '../controllers/inventoryController.js'
 import { handleAttributePress } from '../controllers/attributesController.js'
 import { handleSettingPress } from '../controllers/settingsController.js'
@@ -66,20 +66,20 @@ async function handleAction(action, args) {
   console.log(`Action triggered: ${action} with args: ${args} in `, route.name)
 
   // Delegate handling to the right handler
-  if (route.name === "Main") {
+  if (route.name === 'Main') {
     layout.emptyScene()
     handleChoicePress(action, args)
   }
-  else if (route.name === "Inventory") {
+  else if (route.name === 'Inventory') {
     handleItemPress(action, args)
   }
-  else if (route.name === "Attributes") {
+  else if (route.name === 'Attributes') {
     handleAttributePress(action, args)
   }
-  else if (route.name === "Settings") {
+  else if (route.name === 'Settings') {
     handleSettingPress(action, args)
   } else {
-    console.error("Unknown route or action")
+    console.error('Unknown route or action')
   }
 }
 
