@@ -7,12 +7,15 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MainLayout from '../layouts/MainLayout.vue'
 import DisclaimerPage from '../layouts/DisclaimerPage.vue'
 import TitlePage from '../layouts/TitlePage.vue'
+import CreationPage from '../layouts/CreationPage.vue'
 
 import AttributesPage from '../views/AttributesPage.vue'
 import MainPage from '../views/MainPage.vue'
 import InventoryPage from '../views/InventoryPage.vue'
 import HistoryPage from '../views/HistoryPage.vue'
 import SettingsPage from '../views/SettingsPage.vue'
+
+import { settingsSaveController } from '../controllers/saveController'
 
 const routes = [
   {
@@ -24,6 +27,11 @@ const routes = [
     path: '/title',
     name: 'Title',
     component: TitlePage,
+  },
+  {
+    path: '/creation',
+    name: 'Creation',
+    component: CreationPage
   },
   {
     path: '/game',
@@ -42,5 +50,12 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (from.name === 'Settings') {
+    settingsSaveController.save()
+  }
+  next();
+});
 
 export default router

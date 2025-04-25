@@ -48,3 +48,7 @@ stepN: {                                                    // step identifier
     "image":                                                 // path of the image to put
     "ost":                                                   // path of the ost to play
 }       
+
+
+// Nota bene:
+// $ è riservato. Scrivere $sound$ riprodurrà l'sfx sound

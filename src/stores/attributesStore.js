@@ -4,9 +4,10 @@
 */
 
 import { defineStore } from 'pinia'
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 
 export const useAttributesStore = defineStore('attributes', () => {
+    const MAX = 10
     const attributes = reactive({
       sanity: 2,
       toughness: 2,
@@ -17,6 +18,25 @@ export const useAttributesStore = defineStore('attributes', () => {
     })
     const descriptions = ref({})
     const currDescription = ref('')
+
+    function getcreationAttributes() {
+      return computed(() => {
+        return Object.entries(attributes).map(([key, value]) => ({
+          text: key,
+          get meta() {
+            return attributes[key]
+          },
+          action: 'default',
+          target: key,
+          lb: '-',
+          laction: 'dec',
+          ltarget: key,
+          rb: '+',
+          raction: 'inc',
+          rtarget: key
+        }))
+      })
+    }
   
     function increaseAttribute(attr, amount) {
       if (attributes[attr] !== undefined) {
@@ -53,15 +73,26 @@ export const useAttributesStore = defineStore('attributes', () => {
     function loadCurrDesc(item) {
       currDescription.value = descriptions.value[item]
     }
+
+    function save() {
+      return { object: attributes }
+    } 
+
+    function load(saveState) {
+      Object.assign(attributes, saveState.object)
+    }
   
     return {
+      getcreationAttributes,
       increaseAttribute,
       checkAttribute,
       getFormattedAttributes,
       getCurrDesc,
       loadCurrDesc,
       checkDesc,
-      loadDesc
+      loadDesc,
+      save,
+      load
     }
   })
   

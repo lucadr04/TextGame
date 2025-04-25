@@ -59,6 +59,14 @@ export const useInventoryStore = defineStore('inventory', () => {
     currDescription.value = descriptions.value[item]
   }
 
+  function save() {
+    return { object: inventory }
+  } 
+
+  function load(saveState) {
+    Object.assign(inventory, saveState.object)
+  }
+
   return {
     inventory,
     addItem,
@@ -68,7 +76,9 @@ export const useInventoryStore = defineStore('inventory', () => {
     getCurrDesc,
     loadCurrDesc,
     checkDesc,
-    loadDesc
+    loadDesc,
+    save,
+    load
   }
 })
   

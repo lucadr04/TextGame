@@ -18,7 +18,7 @@ import { useRouter } from 'vue-router'
 
 const showText = ref(false)
 const message = ref(
-  `This is a cool game I made myself UwU<br>All rights reserved`
+  `This is a cool game I made myself UwU<br>All rights reserved<br><br>This game saves data automatically`
 )
 
 const router = useRouter()

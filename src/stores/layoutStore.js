@@ -19,6 +19,10 @@ export const useLayoutStore = defineStore('layout', () => {
     textbox.value = newText
   }
 
+  function addToTextbox(newChar) {
+    textbox.value += newChar
+  }
+
   function updateChoicebox(newChoices) {
     choices.value = newChoices
   }
@@ -38,8 +42,9 @@ export const useLayoutStore = defineStore('layout', () => {
     choices,
     image,
     updateTextbox,
+    addToTextbox,
     updateChoicebox,
     updateImagebox,
-    emptyScene
+    emptyScene,
   }
 })

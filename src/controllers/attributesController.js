@@ -23,8 +23,18 @@ export async function printScene() {
 export async function handleAttributePress(action, target) {
   const attributes = useAttributesStore()
   const layout = useLayoutStore()
+  if (!attributes.checkDesc()) {
+    await attributes.loadDesc();
+  }
   if(action == "default") {
     attributes.loadCurrDesc(target)
+    console.log(target, attributes.getCurrDesc())
     layout.updateTextbox(attributes.getCurrDesc())
+  } 
+  else if(action == "inc") {
+    attributes.increaseAttribute(target, 1)
+  }
+  else if(action == "dec") {
+    attributes.increaseAttribute(target, (-1))
   }
 }

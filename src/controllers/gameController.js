@@ -9,10 +9,14 @@ import { useSettingsStore } from '../stores/settingsStore.js'
 
 import { useLayoutStore } from '../stores/layoutStore.js'
 
+import SfxController from '../controllers/sfxController.js'
+import SaveController from '../controllers/saveController.js'
+
 // Function that loads the game data inside the layout
 export async function printScene() {
   const game = useGameStore()
   const layout = useLayoutStore()
+  const settings = useSettingsStore()
 
   layout.emptyScene()
 
@@ -23,9 +27,13 @@ export async function printScene() {
   
   const currentStepData = game.getSceneData();
 
-  layout.updateTextbox(currentStepData.text)
   /*layout.updateImagebox()*/
   /*layout.updateOst()*/
+
+  // Fancy text printing
+  const fullText = currentStepData.text
+  const speed = settings.getTS()
+  fancyTextPrinting(fullText, speed)
 
   // The choicebox is a complex one to handle, here is all the logic behind it
   // (maybe do a function just for that <3)
@@ -34,7 +42,7 @@ export async function printScene() {
   layout.updateChoicebox(formattedOptions)
 }
 
-// Function that handles when a choicetext is selected
+// Fuif(i%2 == 0) nction that handles when a choicetext is selected
 export async function handleChoicePress(action, target) {
   const game = useGameStore()
 
@@ -51,9 +59,12 @@ export async function handleChoicePress(action, target) {
   if(action === "default") {
     game.setCurrentStep(target[0])
     await game.reloadSceneData()
-    // apply music here
+    /* apply music here */
     await new Promise(resolve => setTimeout(resolve, 300))
   }
+
+  // Save game
+
   
   // Reload scene
   await printScene()
@@ -62,4 +73,56 @@ export async function handleChoicePress(action, target) {
 // Function that manages options in regards to attributes and inventory checks
 function formatOptions(options) {
   return options
+}
+
+// Function to print text with sfx and a set speed
+// Note: £ can't be used in 'normal text'. Luckily it is not a big loss
+function fancyTextPrinting(fullText, speed) {
+  const layout = useLayoutStore()
+  let i = 0
+  let stopped = false
+
+  function typeNextChar() {
+    if (stopped || i >= fullText.length) return
+
+    let char = fullText[i]
+    if(char === '£') {
+      let sfx = ''
+      i++;
+      while(fullText[i] != $)
+        sfx += fullText[i]
+      SfxController.play(sfx)
+      return setTimeout(typeNextChar, speed)
+    }
+
+    layout.addToTextbox(char)
+
+    if (![' ', ',', '.', '!', '?'].includes(char)) {
+      SfxController.play('txt3')
+    }
+
+    i++
+
+    // Variable delay to slow down after punctuation
+    let delay = speed
+    if ([','].includes(char)) {
+      delay = speed * 3 // adjust multiplier as needed
+    } else if (['.', '!', '?'].includes(char)) {
+      delay = speed * 7 // adjust multiplier as needed
+    } 
+
+    SfxController.typeTimeout = setTimeout(typeNextChar, delay)
+  }
+
+  typeNextChar()
+
+  // Click to skip
+  const stopOnClick = () => {
+    stopped = true
+    layout.updateTextbox(fullText)
+    clearTimeout(SfxController.typeTimeout)
+    document.removeEventListener('click', stopOnClick)
+  }
+
+  document.addEventListener('click', stopOnClick)
 }

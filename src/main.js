@@ -12,10 +12,20 @@ const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 
-/*
+
 if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
   window.location.href = '/';
 }
+
+
+/*
+  Here i should handle the savestates!
+*/ 
+
+/* 
+  Here i should handle the music!
 */
+import SfxController from './controllers/sfxController.js'
+SfxController.init()
 
 app.mount('#app')

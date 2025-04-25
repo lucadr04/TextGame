@@ -9,9 +9,7 @@
 <template>
   <transition name="fade-in" appear>
     <div class="screenbox">
-      <div class="navbox" v-if="route.name !== 'game/creation'">
-        <Navbar />
-      </div>
+      <Navbar />
       <transition name="fade-change" mode="out-in">
         <div :key="route.fullPath">
           <div class="playbox">
@@ -28,7 +26,7 @@
                     </div>
                     <div class="choicemetatext">{{ choice.meta }}</div>
                     <div class="choicemetaright" @click="rightAction(choice.raction, choice.rtarget)">
-                      {{ choice.rb }}Use
+                      {{ choice.rb }}
                     </div>
                   </div>
                 </div>
@@ -62,36 +60,36 @@ import { handleSettingPress } from '../controllers/settingsController.js'
 const route = useRoute()
 
 // Manage the click on a choicerow
-async function handleAction(action, args) {
-  console.log(`Action triggered: ${action} with args: ${args} in `, route.name)
+async function handleAction(action, target) {
+  console.log(`Action triggered: ${action} with target: ${target} in `, route.name)
 
   // Delegate handling to the right handler
   if (route.name === 'Main') {
     layout.emptyScene()
-    handleChoicePress(action, args)
+    handleChoicePress(action, target)
   }
   else if (route.name === 'Inventory') {
-    handleItemPress(action, args)
+    handleItemPress(action, target)
   }
   else if (route.name === 'Attributes') {
-    handleAttributePress(action, args)
+    handleAttributePress(action, target)
   }
   else if (route.name === 'Settings') {
-    handleSettingPress(action, args)
+    handleSettingPress(action, target)
   } else {
     console.error('Unknown route or action')
   }
 }
 
 // Manage the click on a choicemeta
-function leftAction(route, action, args) {
-  console.log(`Left action triggered: ${action} with args:`, args);
-  handleAction(route, action, args);
+async function leftAction(action, target) {
+  console.log(`Left action triggered: ${action} with target:`, target);
+  handleAction(action, target);
 }
 
-function rightAction(route, action, args) {
-  console.log(`Right action triggered: ${action} with args:`, args);
-  handleAction(route, action, args);
+async function rightAction(action, target) {
+  console.log(`Right action triggered: ${action} with target:`, target);
+  handleAction(action, target);
 }
 </script>
 

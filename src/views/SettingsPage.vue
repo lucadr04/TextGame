@@ -1,9 +1,10 @@
 <template></template>
 
-<script>
-  export default {
-    mounted() {
-      document.querySelector('.textbox').textContent = 'Settings';
-    }
-  }
+<script setup>
+  import { onMounted } from 'vue'
+  import { printScene } from '../controllers/settingsController.js'
+  
+  onMounted(async () => {
+    await printScene()
+  })
 </script>

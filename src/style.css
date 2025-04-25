@@ -35,6 +35,14 @@ main {
   padding-top: 2vh;
 }
 
+.write {
+  background-color: black; 
+  font-family: 'VT323', monospace;
+  color: white;
+  font-size: 2vw; 
+  border: none; 
+}
+
 .screenbox {
   margin: 0;
   display: grid;

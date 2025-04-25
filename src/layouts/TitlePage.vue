@@ -29,16 +29,25 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import SaveController from '../controllers/saveController.js'
 
 const visible = ref(true)
 const router = useRouter()
 
+
 function handleStart() {
   visible.value = false
 
-  setTimeout(() => {
-    router.push('/game/main')
-  }, 1800)
+  const result = SaveController.load()
+  if (result === null) {
+    setTimeout(() => {
+      router.push('/creation')
+    }, 1800)
+  } else {
+    setTimeout(() => {
+      router.push('/game/main')
+    }, 1800)
+  }
 }
 </script>
 

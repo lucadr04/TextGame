@@ -14,6 +14,7 @@ export const useGameStore = defineStore('game', () => {
   const currentLocation = ref('base')
   const currentStep = ref('step1')
   const flags = reactive({})
+  let nickname = 'Hacker'
 
   // Funzione per caricare il json corretto
   async function reloadSceneData() {
@@ -60,9 +61,33 @@ export const useGameStore = defineStore('game', () => {
     return !!flags[name]
   }
 
+  function getNick() {
+    return nickname
+  }
+
+  function setNick(newNick) {
+    nickname = newNick
+  }
   // debug
   function logCurrent() {
     console.log(`day: ${currentDay.value}, location: ${currentLocation.value}, step ${currentStep.value}`)
+  }
+
+  function save() {
+    return { 
+      currentDay: currentDay.value, 
+      currentLocation: currentLocation.value, 
+      currentStep: currentStep.value,
+      nickname: nickname 
+    };
+  }
+
+  function load(saveState) {
+    currentDay.value = saveState.currentDay
+    currentLocation.value = saveState.currentLocation
+    currentStep.value = saveState.currentStep
+    nickname = saveState.nickname
+    console.log(nickname)
   }
 
   return {
@@ -74,6 +99,10 @@ export const useGameStore = defineStore('game', () => {
     setCurrentDay,
     setCurrentLocation,
     setCurrentStep,
-    logCurrent
+    logCurrent,
+    getNick,
+    setNick,
+    save,
+    load
   }
 })

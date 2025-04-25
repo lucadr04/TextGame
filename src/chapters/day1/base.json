@@ -48,7 +48,23 @@
                 "effects": [{}],
                 "flags": [{}],
                 "action": "default",
-                "target": ["step3"]
+                "target": ["step4"]
+            }
+        ],
+        "image": "Immagine qui",
+        "ost": "OST qui"
+    },
+    "step4" : {
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan gravida orci, sit amet semper mauris consequat vitae. Integer non enim at neque suscipit ultricies eget a lectus. Nunc nec neque sit amet velit eleifend faucibus in eget justo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc eget ante efficitur, accumsan mauris ut, sollicitudin mauris. Phasellus porttitor tincidunt dui, sit amet vulputate velit ullamcorper nec. Cras porta purus eget elit semper, sit amet sagittis odio tristique. Ut ut nisl mattis, tempus elit sit amet, porttitor leo. Maecenas id elit id purus lobortis gravida. Suspendisse potenti. Vivamus vehicula justo augue. Vivamus sagittis augue consectetur, feugiat est in, tristique dui. Etiam quis fermentum nunc. Fusce auctor fermentum nibh. Proin eget augue bibendum, molestie dui eu, cursus sapien.Lorem",
+        "options": [
+            {
+                "text": "Yeah better make something else",
+                "attributes": [{}],
+                "items": [{}],
+                "effects": [{}],
+                "flags": [{}],
+                "action": "default",
+                "target": ["step3"]                
             }
         ],
         "image": "Immagine qui",
