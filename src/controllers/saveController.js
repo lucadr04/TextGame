@@ -1,4 +1,5 @@
 // controllers/SaveController.js
+import { ref } from 'vue'
 const SAVE_KEY = 'myGameSaveYay'
 const SETTINGS_SAVE_KEY = 'myGameSettingsYay'
 
@@ -6,13 +7,16 @@ import { useGameStore } from '../stores/gameStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useInventoryStore } from '../stores/inventoryStore'
 import { useAttributesStore } from '../stores/attributesStore'
+import { useLayoutStore } from '../stores/layoutStore'
 
 const SaveController = {
   save() {
-    const gameState = getData();
+    const gameState = getData()
+    const layout = useLayoutStore()
     try {
       localStorage.setItem(SAVE_KEY, JSON.stringify(gameState))
       console.log('✅ Game saved.')
+      layout.triggerSaveIcon()
     } catch (e) {
       console.error('❌ Error saving game:', e)
     }

@@ -17,7 +17,7 @@ export async function printScene() {
   const game = useGameStore()
   const layout = useLayoutStore()
   const settings = useSettingsStore()
-
+  
   layout.emptyScene()
 
   // Scene initialization
@@ -51,6 +51,7 @@ export async function handleChoicePress(action, target) {
     game.setCurrentDay(target[2])
     game.setCurrentLocation(target[1])
     game.setCurrentStep(target[0])
+    SaveController.save()
     await game.reloadSceneData()
     // apply music here
     await new Promise(resolve => setTimeout(resolve, 700))

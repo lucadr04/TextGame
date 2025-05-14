@@ -41,6 +41,7 @@
       </transition>
     </div>
   </transition>
+  <SaveIcon ref="saveIcon"/>
 </template>
 
 <script setup>
@@ -48,6 +49,8 @@
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
 import Navbar from '../components/Navbar.vue'
+import SaveIcon from '../components/SaveIcon.vue'
+const saveIcon = ref(null)
 
 import { useLayoutStore } from '../stores/layoutStore'
 const layout = useLayoutStore()

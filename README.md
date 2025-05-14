@@ -1,5 +1,7 @@
-# Vue 3 + Vite
+# Text-Based Game
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is an ongoing project that I'm developing using **Vue.js**. Currently, the game is in its early stages, and I have only completed the basic "skeleton" of the game. However, I plan to add more features and interactive elements in the near future.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Project Overview
+
+This project is a **text-based game** where players will navigate through different scenarios and make decisions that impact the storyline. The game will be primarily text-based, focusing on narrative choices.. It's being developed with **Vue.js** and **javascript**.

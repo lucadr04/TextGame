@@ -8,12 +8,10 @@ import { ref } from 'vue'
 
 // Funzione per modificare il contenuto del layout di gioco
 export const useLayoutStore = defineStore('layout', () => {
-  const textbox = ref('Initial text in the textbox')
-  const choices = ref([
-    { text: 'Choice 1', meta: 'Meta 1' },
-    { text: 'Choice 2', meta: 'Meta 2' },
-  ])
-  const image = ref('path/to/image.png') 
+  const textbox = ref('Loading...')
+  const choices = ref([])
+  const image = ref('path/to/image.png')
+  const saveIcon = ref(false) 
 
   function updateTextbox(newText) {
     textbox.value = newText
@@ -37,14 +35,23 @@ export const useLayoutStore = defineStore('layout', () => {
     image.value = ''
   }
 
+  function triggerSaveIcon() {
+    saveIcon.value = true
+    setTimeout(() => {
+      saveIcon.value = false
+    }, 2000) // 1 second visible
+  }
+
   return {
     textbox,
     choices,
     image,
+    saveIcon,
     updateTextbox,
     addToTextbox,
     updateChoicebox,
     updateImagebox,
     emptyScene,
+    triggerSaveIcon,
   }
 })
