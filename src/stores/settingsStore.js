@@ -13,7 +13,7 @@ export const useSettingsStore = defineStore('settings', () => {
   const mappedChoices = computed(() => [
     {text: 'bgm volume', meta: bgmVolume, lb: '-', laction: 'dec', ltarget: 'bgm', rb: '+', raction: 'inc', rtarget: 'bgm'},
     {text: 'sfx volume', meta: sfxVolume, lb: '-', laction: 'dec', ltarget: 'sfx', rb: '+', raction: 'inc', rtarget: 'sfx'},
-    {text: 'text speed', meta: textSpeed, lb: '-', laction: 'dec', ltarget: 'ts', rb: '+', raction: 'inc', rtargxtet: 'ts'},
+    {text: 'text speed', meta: textSpeed, lb: '-', laction: 'dec', ltarget: 'ts', rb: '+', raction: 'inc', rtarget: 'ts'},
     {text: 'delete game data', meta: '', action: 'delete save'}
   ])
 

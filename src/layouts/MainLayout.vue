@@ -50,7 +50,7 @@ import { ref } from 'vue'
 import Navbar from '../components/Navbar.vue'
 import SaveIcon from '../components/SaveIcon.vue'
 import { useLayoutStore } from '../stores/layoutStore.js'
-import { handleAction, leftAction, rightAction } from '../logics/handlePress.js'
+import { handleAction, leftAction, rightAction } from '../logics/handleAction.js'
 
 // Setup
 const layout = useLayoutStore()

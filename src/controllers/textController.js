@@ -1,87 +1,58 @@
-// text/TextPrinter.js
-export class TextPrinter {
-  constructor(layoutStore, sfxController) {
-    this.layout = layoutStore
-    this.sfx = sfxController
-    this.isStopped = false
-    this.currentTimeout = null
-  }
+import { useLayoutStore } from '../stores/layoutStore.js'
 
-  async print(fullText, speed) {
-    this.isStopped = false
-    this.layout.emptyTextbox()
-    
-    return new Promise((resolve) => {
-      this._printRecursive(fullText, speed, 0, resolve)
-    })
-  }
+import SfxController from '../controllers/sfxController.js'
 
-  _printRecursive(fullText, speed, index, resolve) {
-    if (this.isStopped || index >= fullText.length) {
-      resolve()
-      return
+// Function to print text with sfx and a set speed
+// Note: £ can't be used in 'normal text'. Luckily it is not a big loss
+export function textPrinter(fullText, speed) {
+  const layout = useLayoutStore()
+  let i = 0
+  let stopped = false
+
+  function typeNextChar() {
+    if (stopped || i >= fullText.length) return
+
+    let char = fullText[i]
+    if(char === '£') {
+      let sfx = ''
+      i++;
+      while(i < fullText.length && fullText[i] !== '£') {
+        sfx += fullText[i]
+        i++;
+      }
+      i++;
+      SfxController.play(sfx)
+      return setTimeout(typeNextChar, speed)
     }
 
-    const char = fullText[index]
-    
-    // Handle SFX commands
-    if (char === '£') {
-      const { sfxName, newIndex } = this._extractSfxCommand(fullText, index)
-      this.sfx.play(sfxName)
-      this.currentTimeout = setTimeout(() => 
-        this._printRecursive(fullText, speed, newIndex, resolve), speed
-      )
-      return
-    }
+    layout.addToTextbox(char)
 
-    this.layout.addToTextbox(char)
-    this._playTypeSound(char)
-    
-    const delay = this._getPunctuationDelay(char, speed)
-    const nextIndex = index + 1
-    
-    this.currentTimeout = setTimeout(() => 
-      this._printRecursive(fullText, speed, nextIndex, resolve), delay
-    )
-  }
-
-  _extractSfxCommand(text, startIndex) {
-    let sfxName = ''
-    let i = startIndex + 1
-    
-    while (i < text.length && text[i] !== '$') {
-      sfxName += text[i]
-      i++
-    }
-    
-    return { sfxName, newIndex: i + 1 }
-  }
-
-  _getPunctuationDelay(char, baseSpeed) {
-    const delays = {
-      ',': baseSpeed * 3,
-      '.': baseSpeed * 7,
-      '!': baseSpeed * 7,
-      '?': baseSpeed * 7
-    }
-    return delays[char] || baseSpeed
-  }
-
-  _playTypeSound(char) {
     if (![' ', ',', '.', '!', '?'].includes(char)) {
-      this.sfx.play('txt3')
+      SfxController.play('txt3')
     }
+
+    i++
+
+    // Variable delay to slow down after punctuation
+    let delay = speed
+    if ([','].includes(char)) {
+      delay = speed * 3 // adjust multiplier as needed
+    } else if (['.', '!', '?'].includes(char)) {
+      delay = speed * 8 // adjust multiplier as needed
+    } 
+
+    SfxController.typeTimeout = setTimeout(typeNextChar, delay)
   }
 
-  stop() {
-    this.isStopped = true
-    if (this.currentTimeout) {
-      clearTimeout(this.currentTimeout)
-    }
+  typeNextChar()
+
+  // Click to skip
+  const stopOnClick = () => {
+    stopped = true
+    layout.updateTextbox(fullText.replace(/£.*?\£/g, ''))
+    clearTimeout(SfxController.typeTimeout)
+    document.removeEventListener('click', stopOnClick)
   }
 
-  skipToEnd(fullText) {
-    this.stop()
-    this.layout.updateTextbox(fullText)
-  }
+  document.addEventListener('click', stopOnClick)
 }
