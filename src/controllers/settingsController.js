@@ -4,7 +4,7 @@
 
 import { useSettingsStore } from '../stores/settingsStore.js'
 import { useLayoutStore } from '../stores/layoutStore.js'
-import SaveController from '../controllers/saveController.js'
+import SaveController from './saveController.js'
 
 export async function printScene() {
   const settings = useSettingsStore()

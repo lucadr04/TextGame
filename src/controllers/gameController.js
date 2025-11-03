@@ -9,8 +9,8 @@ import { useSettingsStore } from '../stores/settingsStore.js'
 
 import { useLayoutStore } from '../stores/layoutStore.js'
 
-import SfxController from '../controllers/sfxController.js'
-import SaveController from '../controllers/saveController.js'
+import SfxController from './sfxController.js'
+import SaveController from './saveController.js'
 
 // Function that loads the game data inside the layout
 export async function printScene() {
