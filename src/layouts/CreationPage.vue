@@ -20,7 +20,7 @@
                     <input type="text" class="write" placeholder="Enter your nickname" v-model="nicknameInput">
                   </div>
                   <div class="choicemeta">
-                    <button v-if="pointsLeft === 0 && nicknameInput" @click="finalize()">Ready</button>
+                    <div class="choicetext" v-if="pointsLeft === 0 && nicknameInput" @click="finalize()"> Ready </div>
                   </div>
                 </div>
                 <div class="choicerow" v-for="(choice, i) in attributes" :key="i">

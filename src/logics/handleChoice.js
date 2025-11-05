@@ -1,31 +1,42 @@
-export async function handleChoicePress(action, target, optionData = {}) {
+import { useGameStore } from '../stores/gameStore.js'
+import { useInventoryStore } from '../stores/inventoryStore.js'
+import { useAttributesStore } from '../stores/attributesStore.js'
+import SaveController from '../controllers/saveController.js'
+import { printScene } from '../controllers/gameController.js'
+
+export async function handleChoicePress(choice) {
   const game = useGameStore()
   let wait = 300
 
-  // Handle inventory changes if specified
-  if (optionData.inventory) {
-    const inventory = useInventoryStore()
-    if (optionData.inventory.add) {
-      inventory.addItem(optionData.inventory.add)
-    }
-    if (optionData.inventory.remove) {
-      inventory.removeItem(optionData.inventory.remove)
-    }
-  }
+  console.log(`Handling choice: `, choice)
+  const { action, target, effects } = choice
 
-  // Handle attribute changes if specified
-  if (optionData.attributes) {
-    const attributes = useAttributesStore()
-    Object.entries(optionData.attributes).forEach(([attr, change]) => {
-      attributes.modifyAttribute(attr, change)
-    })
-  }
-
-  // Handle flags if specified
-  if (optionData.flags) {
-    optionData.flags.forEach(flag => {
-      game.setFlag(flag, true)
-    })
+  if (effects) {
+    if (effects.edititem) {
+      const inventory = useInventoryStore()
+      for (const item of effects.edititem) {
+        if (item.remove) {
+          inventory.removeItem(item.item, item.quantity)
+        } else {
+          inventory.addItem(item.item, item.quantity)
+        }
+      }
+    }
+    if (effects.editattribute) {
+      const attributes = useAttributesStore()
+      for (const attr of effects.editattribute) {
+        if (attr.remove) {
+          attributes.modifyAttribute(attr.attribute, -attr.quantity)
+        } else {
+          attributes.modifyAttribute(attr.attribute, attr.quantity)
+        }
+      }
+    }
+    if (effects.editflags) {
+      for (const flag of effects.editflags) {
+        game.setFlag(flag, value)
+      }
+    }
   }
 
   // Handle navigation

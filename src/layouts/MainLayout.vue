@@ -18,13 +18,15 @@
             <div class="bottombox">
               <div class="choicebox">
                 <div class="choicerow" v-for="(choice, i) in layout.choices" :key="i">
-                  <div class="choicetext" @click="handleActionLocal(choice.action, choice.target)">{{ choice.text }}</div>
+                  <div class="choicetext" @click="handleActionLocal(choice)">
+                    {{ choice.text }} <span class="choicesubtext"> {{ choice.subtext }} </span>
+                  </div>
                   <div class="choicemeta">
-                    <div class="choicemetaleft" @click="leftActionLocal(choice.laction, choice.ltarget)">
+                    <div class="choicemetaleft" @click="leftActionLocal(choice)">
                       {{ choice.lb }}
                     </div>
                     <div class="choicemetatext">{{ choice.meta }}</div>
-                    <div class="choicemetaright" @click="rightActionLocal(choice.raction, choice.rtarget)">
+                    <div class="choicemetaright" @click="rightActionLocal(choice)">
                       {{ choice.rb }}
                     </div>
                   </div>
@@ -58,9 +60,9 @@ const saveIcon = ref(null)
 const route = useRoute()
 
 // Redirected action handlers
-const handleActionLocal = (action, target) => handleAction(action, target, route, layout)
-const leftActionLocal = (action, target) => leftAction(action, target, route, layout)
-const rightActionLocal = (action, target) => rightAction(action, target, route, layout)
+const handleActionLocal = (choice) => handleAction(choice, route, layout)
+const leftActionLocal = (choice) => leftAction(choice, route, layout)
+const rightActionLocal = (choice) => rightAction(choice, route, layout)
 </script>
 
 <style>

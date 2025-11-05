@@ -33,7 +33,7 @@ export async function printScene() {
   // Print text
   textPrinter(currentStepData.text, settings.getTS())
 
-  // Handle choices filter and display
+  // Handle options filter and display
   handleOptions(currentStepData.options, layout)
 }
 
@@ -58,7 +58,6 @@ export async function handleChoicePress(action, target) {
     /* apply music here */
     await new Promise(resolve => setTimeout(resolve, wait))
 
-  // Save game
 
   
   // Reload scene

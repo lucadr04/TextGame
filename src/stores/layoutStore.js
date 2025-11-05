@@ -22,6 +22,7 @@ export const useLayoutStore = defineStore('layout', () => {
   }
 
   function updateChoicebox(newChoices) {
+    console.log('Updating choices:', newChoices)
     choices.value = newChoices
   }
 
