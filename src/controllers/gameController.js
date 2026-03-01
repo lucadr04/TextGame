@@ -6,8 +6,6 @@ import { useGameStore } from '../stores/gameStore.js'
 import { useSettingsStore } from '../stores/settingsStore.js'
 import { useLayoutStore } from '../stores/layoutStore.js'
 
-import SaveController from '../controllers/saveController.js'
-
 import { textPrinter } from '../controllers/textController.js'
 import { handleOptions } from '../logics/handleOptions.js'
 
@@ -35,31 +33,4 @@ export async function printScene() {
 
   // Handle options filter and display
   handleOptions(currentStepData.options, layout)
-}
-
-export async function handleChoicePress(action, target) {
-  const game = useGameStore()
-  let wait = 300
-
-  // Jump for when the day and/or location changes
-  if(action === "jump") {
-    game.setCurrentDay(target[2])
-    game.setCurrentLocation(target[1])
-    game.setCurrentStep(target[0])
-    SaveController.save()
-    wait = 800
-  }
-  // Jump for when only the step changes
-  else if(action === "default") {
-    game.setCurrentStep(target[0])
-  }
-
-  await game.reloadSceneData()
-    /* apply music here */
-    await new Promise(resolve => setTimeout(resolve, wait))
-
-
-  
-  // Reload scene
-  await printScene()
 }
