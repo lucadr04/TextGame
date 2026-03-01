@@ -5,20 +5,19 @@ stepN: {                                                    // step identifier
                                                                have the attributes required, the option won't appear
         {
             "text":                                         // Text to display in the choicebox
+            "subtext":                                      // Subtext to display in the choicebox
             "attributes": [
                 {
                     "attribute":                            // Attribute identifier
                     "value":                                // Requested attribute value
                     "type":                                 // If it has to be ">=" or "<" of the value
-
                 }
             ],         
             "items": [
                 {
                     "item":                                 // Item identifier
                     "quantity":                             // Quantity requested
-                    "remove":                               // If it has to be taken away "true" or not "false"
-
+                    "remove":                               // If it has to be taken away "true" or given "false"
                 }
             ],
             "flags": [
@@ -28,15 +27,17 @@ stepN: {                                                    // step identifier
                 }
             ],
             "effects": [{
-                "getitem": [{                                // Get a certain quantity of that item
+                "edititem": [{                                // Get a certain quantity of that item
                     "item":
                     "quantity":
+                    "remove":                                 // if true removes, else adds
                 }]
-                "getattribute": [{                           // Adds to the attribute a certain quantity
+                "editattribute": [{                           // Adds to the attribute a certain quantity
                     "attribute":
                     "quantity":
+                    "remove":                                 // if true removes, else adds
                 }]
-                setflag: [{                                  // Set flag to a value
+                editflag: [{                                  // Set flag to a value
                     "flag":                                  
                     "value":                                                             
                 }]
@@ -50,5 +51,6 @@ stepN: {                                                    // step identifier
 }       
 
 
-// Nota bene:
-// $ è riservato. Scrivere $sound$ riprodurrà l'sfx sound
+// Notes:
+// £ is reserved. £sfx£ will reproduce the 'sfx' sound
+// items and attributes removed will not go under 0.

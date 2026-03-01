@@ -1,8 +1,5 @@
 <!--
-  This is the title page.
-  This page contains the game logo, the start button, that sends yout to /game/main
-  To be implemented is a OST that plays behind it
-  To be implemented is the button that, if you don't have a save file, creates one
+  This is the title page
 -->
 
 <template>
@@ -31,6 +28,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import SaveController from '../controllers/saveController.js'
 
+// Setup
 const visible = ref(true)
 const router = useRouter()
 
@@ -67,6 +65,7 @@ function handleStart() {
   visible.value = false
   fadeOutAudio()
 
+  // Se non c'è un salvataggio, manda a /creation, altrimenti a /game/main
   const result = SaveController.load()
   if (result === null) {
     setTimeout(() => {

@@ -16,21 +16,23 @@ export const useInventoryStore = defineStore('inventory', () => {
   const descriptions = ref({})
   const currDescription = ref('')
 
-  function addItem(item) {
-    if (!inventory.value.includes(item)) {
-      inventory.value.push(item)
+  function addItem(item, count = 1) {
+    if (inventory[item]) {
+      inventory[item] += count
+    } else {
+      inventory[item] = count
     }
   }
 
-  function removeItem(item) {
-    const index = inventory.value.indexOf(item)
-    if (index !== -1) {
-      inventory.value.splice(index, 1)
+  function removeItem(item, count = 1) {
+    if (inventory[item]) {
+      inventory[item] -= count
+      if (inventory[item] <= 0) delete inventory[item]
     }
   }
 
   function checkItem(item) {
-    return inventory.value.includes(item)
+    return inventory[item] || 0
   }
 
   function getFormattedInventory() {

@@ -3,14 +3,13 @@
 */
 
 import { useGameStore } from '../stores/gameStore.js'
-import { useInventoryStore } from '../stores/inventoryStore.js'
-import { useAttributesStore } from '../stores/attributesStore.js'
 import { useSettingsStore } from '../stores/settingsStore.js'
-
 import { useLayoutStore } from '../stores/layoutStore.js'
 
 import SaveController from '../controllers/saveController.js'
 import { textPrint } from '../controllers/printerController.js'
+import { textPrinter } from '../controllers/textController.js'
+import { handleOptions } from '../logics/handleOptions.js'
 
 // Function that loads the game data inside the layout
 export async function printScene() {
@@ -25,6 +24,7 @@ export async function printScene() {
     await game.reloadSceneData();
   }
   
+  // Get current data
   const currentStepData = game.getSceneData();
 
   /*layout.updateImagebox()*/

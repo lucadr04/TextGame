@@ -108,6 +108,11 @@ button {
   overflow: hidden;
 }
 
+.choicesubtext {
+  font-size: 1.3vw;
+  color: grey;
+}
+
 .choicetext:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }

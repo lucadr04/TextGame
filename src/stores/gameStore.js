@@ -58,7 +58,7 @@ export const useGameStore = defineStore('game', () => {
   }
 
   function checkFlag(name) {
-    return !!flags[name]
+    return flags[name]
   }
 
   function getNick() {
