@@ -24,8 +24,7 @@
 </template>
 
 <script setup>
-// Imports
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import SaveController from '../controllers/saveController.js'
 
@@ -33,8 +32,38 @@ import SaveController from '../controllers/saveController.js'
 const visible = ref(true)
 const router = useRouter()
 
+const audio = new Audio('/bgm/TitleTheme.wav')
+audio.loop = false
+audio.volume = 0.8;
+
+audio.play().catch((e) => {
+  console.error("Audio playback failed", e)
+})
+
+onUnmounted(() => {
+  audio.pause()
+})
+
+function fadeOutAudio(duration = 1500) {
+  const stepTime = 50
+  const steps = duration / stepTime
+  const volStep = audio.volume / steps
+  const interval = setInterval(() => {
+    if (audio.volume > volStep) {
+      audio.volume -= volStep
+    } else {
+      audio.volume = 0
+      audio.pause()
+      clearInterval(interval)
+    }
+  }, stepTime)
+}
+
+//====
+
 function handleStart() {
   visible.value = false
+  fadeOutAudio()
 
   // Se non c'è un salvataggio, manda a /creation, altrimenti a /game/main
   const result = SaveController.load()
@@ -102,6 +131,10 @@ function handleStart() {
 
 /* Fade transition */
 .fade-enter-active, .fade-leave-active {
+  transition: opacity 5s ease, transform 8s ease;
+}
+
+.fade-leave-active {
   transition: opacity 2s ease, transform 2s ease;
 }
 

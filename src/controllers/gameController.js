@@ -6,6 +6,8 @@ import { useGameStore } from '../stores/gameStore.js'
 import { useSettingsStore } from '../stores/settingsStore.js'
 import { useLayoutStore } from '../stores/layoutStore.js'
 
+import SaveController from '../controllers/saveController.js'
+import { textPrint } from '../controllers/printerController.js'
 import { textPrinter } from '../controllers/textController.js'
 import { handleOptions } from '../logics/handleOptions.js'
 
@@ -28,9 +30,45 @@ export async function printScene() {
   /*layout.updateImagebox()*/
   /*layout.updateOst()*/
 
-  // Print text
-  textPrinter(currentStepData.text, settings.getTS())
+  // Fancy text printing
+  const fullText = currentStepData.text
+  const speed = settings.getTS()
+  textPrint(fullText, speed)
 
-  // Handle options filter and display
-  handleOptions(currentStepData.options, layout)
+  // The choicebox is a complex one to handle, here is all the logic behind it
+  // (maybe do a function just for that <3)
+  const formattedOptions = formatOptions(currentStepData.options)
+  
+  layout.updateChoicebox(formattedOptions)
+}
+
+// Fuif(i%2 == 0) nction that handles when a choicetext is selected
+export async function handleChoicePress(action, target) {
+  const game = useGameStore()
+
+  // Chapter jump
+  if(action === "jump") {
+    game.setCurrentDay(target[2])
+    game.setCurrentLocation(target[1])
+    game.setCurrentStep(target[0])
+    SaveController.save()
+    await game.reloadSceneData()
+    // apply music here
+    await new Promise(resolve => setTimeout(resolve, 700))
+  }
+  // Step jump
+  if(action === "default") {
+    game.setCurrentStep(target[0])
+    await game.reloadSceneData()
+    /* apply music here */
+    await new Promise(resolve => setTimeout(resolve, 300))
+  }
+
+  // Reload scene
+  await printScene()
+}
+
+// Function that manages options in regards to attributes and inventory checks
+function formatOptions(options) {
+  return options
 }

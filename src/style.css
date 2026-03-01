@@ -35,6 +35,15 @@ main {
   padding-top: 2vh;
 }
 
+button {
+  font-size: 1.5vw;
+  font-family: 'VT323', monospace;
+  border: 0.3vh solid silver;
+  padding: 0.8vh 0.8vw;
+  background-color: black;
+  color: white;
+}
+
 .write {
   background-color: black; 
   font-family: 'VT323', monospace;

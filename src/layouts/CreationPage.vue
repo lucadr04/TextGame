@@ -4,20 +4,24 @@
 -->
 
 <template>
-  <transition name="fade-in" appear>
-    <div class="screenbox">
-      <div class="quickSpacing"></div>
-      <transition name="fade-change" mode="out-in">
-        <div :key="route.fullPath">
-          <div class="playbox">
-            <div class="textbox">
-              {{ layout.textbox }}
-            </div>
-            <div class="bottombox">
-              <div class="choicebox">
-                <div class="choicerow">
-                  <div class="choicetext">
-                    <input type="text" class="write" placeholder="Enter your nickname" v-model="nicknameInput">
+    <transition name="fade-in" appear>
+      <div class="screenbox">
+        <div class="quickSpacing"></div>
+        <transition name="fade-change" mode="out-in">
+          <div :key="route.fullPath">
+            <div class="playbox">
+              <div class="textbox">
+                {{ layout.textbox }}
+              </div>
+              <div class="bottombox">
+                <div class="choicebox">
+                  <div class="choicerow">
+                    <div class="choicetext">
+                      <input type="text" class="write" placeholder="Enter your nickname" v-model="nicknameInput">
+                    </div>
+                    <div class="choicemeta">
+                      <button v-if="pointsLeft === 0 && nicknameInput" @click="createCharacter()">Ready</button>
+                    </div>
                   </div>
                   <div class="choicemeta">
                     <div class="choicetext" v-if="pointsLeft === 0 && nicknameInput" @click="finalize()"> Ready </div>

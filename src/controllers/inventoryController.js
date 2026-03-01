@@ -1,7 +1,6 @@
 /* 
   This is the controller that manages the flow inside game/inventory
-  To implement is a way to use some items. 
-  Maybe when you are at loss of sanity or HP, you drink a potion and boom
+  Todo: Implement a way to use items from the inventory
 */
 
 import { useInventoryStore } from '../stores/inventoryStore.js'
